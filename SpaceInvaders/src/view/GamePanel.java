@@ -91,10 +91,11 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public class Action extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
+			spacecraft.keyPressed(e);
 			
 		}
 		public void keyReleased(KeyEvent e) {
-			
+			spacecraft.keyPressed(e);
 		}
 	}
 }
