@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void newEnemy() {
-		
+//		random = new Random();
 	}
 	
 	public void newPlayer() {
@@ -60,12 +60,18 @@ public class GamePanel extends JPanel implements Runnable {
 		
 	}
 	
-	public void motion() {
-		
+	public void move() {
+		spacecraft.move();
 	}
 	
 	public void checkCollision() {
-		
+		//stops spacecraft at screen end 
+		if(spacecraft.x<=0) {
+			spacecraft.x = 0;
+		}
+		if(spacecraft.x >= (GAME_WIDTH-SPACECRAFT_WIDTH)) { 
+			spacecraft.x = GAME_WIDTH-SPACECRAFT_WIDTH;
+		}
 	}
 	
 	public void run() {
@@ -81,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
 			delta += (now - LastTime)/ns;
 			LastTime = now;
 			if(delta >= 1) {
-				motion();
+				// move(); //we call the move every refresh
 				checkCollision();
 				repaint();
 				delta--;

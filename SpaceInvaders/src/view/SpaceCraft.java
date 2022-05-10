@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class SpaceCraft extends Rectangle {
 	
-	int moveDirection = 5;
+	int moveDirection = 10;
 	int xVelocity; //how fast when pressed,SUPERPOWER FASTER IF COLLECTED ITEM 
 
 	SpaceCraft(int x, int y, int CRAFT_WIDTH, int CRAFT_HEIGHT){
