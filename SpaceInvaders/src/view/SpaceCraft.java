@@ -49,5 +49,7 @@ public class SpaceCraft extends Rectangle {
 		g.setColor(Color.blue);
 		g.fillRect(x, y, width, height);
 		
+		
+		
 	}
 }

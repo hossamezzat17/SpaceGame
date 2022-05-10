@@ -21,8 +21,10 @@ public class GamePanel extends JPanel implements Runnable {
 	Graphics graphics;
 	Random random;
 	SpaceCraft spacecraft;
+	SpaceCraft spacecraft2;
 	LaserShot lasershot;
 	Score score;
+	boolean gameOver = false;
 
 	
 	GamePanel(){
@@ -44,6 +46,8 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void newPlayer() {
 		spacecraft = new SpaceCraft(Math.round(GAME_WIDTH/2),600,SPACECRAFT_WIDTH,SPACECRAFT_HEIGHT);
+		spacecraft2 = new SpaceCraft(300,600,SPACECRAFT_WIDTH,SPACECRAFT_HEIGHT);
+
 	}
 	
 	public void paint(Graphics g) {
@@ -52,11 +56,18 @@ public class GamePanel extends JPanel implements Runnable {
 		draw(graphics);
 		g.drawImage(image,0,0,this); 
 		
+		if (gameOver) {
+			g.setColor(Color.red);
+			g.setFont(new Font("Pixel",Font.BOLD,45));
+			g.drawString("GAME OVER!", 450, 600);
+		}
+		
 	}
 	
 	
 	public void draw(Graphics g) {
 		spacecraft.draw(g);
+		spacecraft2.draw(g);
 		
 	}
 	
@@ -65,6 +76,13 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void checkCollision() {
+		if (spacecraft.intersects(spacecraft2)) {
+			gameOver = true;
+			System.out.println("TEST");
+		}
+		
+		
+		
 		//stops spacecraft at screen end 
 		if(spacecraft.x<=0) {
 			spacecraft.x = 0;
@@ -87,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
 			delta += (now - LastTime)/ns;
 			LastTime = now;
 			if(delta >= 1) {
-				// move(); //we call the move every refresh
 				checkCollision();
 				repaint();
 				delta--;
@@ -98,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public class Action extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
 			spacecraft.keyPressed(e);
-			
+		
 		}
 		public void keyReleased(KeyEvent e) {
 			spacecraft.keyPressed(e);
